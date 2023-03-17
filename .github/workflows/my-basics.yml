@@ -40,7 +40,6 @@ jobs:
       id: init
       run: terraform init
 
-
     - name: 'Az CLI login using OIDC'
       uses: azure/login@v1
       with:
