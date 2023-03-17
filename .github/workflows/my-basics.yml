@@ -38,13 +38,13 @@ jobs:
 
     - name: Terraform Plan
       id: plan
+      run: terraform plan -no-color
+
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         user-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-
-      run: terraform plan -no-color
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
