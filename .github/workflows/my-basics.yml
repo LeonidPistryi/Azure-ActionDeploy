@@ -3,7 +3,7 @@ name: My-GithubActions-Basics
 on:
   push:
     paths:
-    - 'azure-terraform/main.tf'
+    - '/azure-terraform/main.tf'
     branches:
     - main
 
