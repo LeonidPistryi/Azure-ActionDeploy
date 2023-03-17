@@ -2,6 +2,8 @@ name: My-GithubActions-Basics
 
 on:
   push:
+    paths:
+    - 'azure-terraform'
     branches:
     - main
 
@@ -15,10 +17,6 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
-    # env:
-    #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
-    #   tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-    #   subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     steps:
     - name: Checkout code
