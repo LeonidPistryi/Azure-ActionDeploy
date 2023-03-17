@@ -10,11 +10,11 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
-    env:
-      client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      user-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+    # env:
+    #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
+    #   tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+    #   subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    # user-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
     steps:
 
     - name: Checkout code
@@ -31,20 +31,27 @@ jobs:
       id: fmt
       run: terraform fmt
 
-
     - name: Terraform Init
       id: init
       run: terraform init
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
-
+    - name: 'Az CLI login using OIDC'
+      uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        user-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      # with:
+      #   client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #   tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      #   subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #   user-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
