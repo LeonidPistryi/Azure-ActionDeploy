@@ -66,13 +66,13 @@ resource "azurerm_kubernetes_cluster" "product" {
     vm_size    = "Standard_B2s"
   }
 
-  linux_profile {
-    admin_username = "ubuntu"
+  # linux_profile {
+  #   admin_username = "ubuntu"
 
-    ssh_key {
-      key_data = file(var.ssh_public_key)
-    }
-  }
+  #   ssh_key {
+  #     key_data = file(var.ssh_public_key)
+  #   }
+  # }
 
   identity {
     type = "SystemAssigned"
