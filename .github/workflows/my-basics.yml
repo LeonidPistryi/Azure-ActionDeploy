@@ -13,10 +13,13 @@ permissions:
   pull-requests: write
 
 jobs:
-
+  
   terraform:
     runs-on: ubuntu-latest
-
+    defaults: 
+      run: 
+        working-directory: azure-terraform
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
