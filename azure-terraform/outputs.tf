@@ -1,3 +1,3 @@
-output "resource_group_name" {
-  value = azurerm_resource_group.product.name
-}
+# output "resource_group_name" {
+#   value = azurerm_resource_group.product.name
+# }
