@@ -1,7 +1,7 @@
 # Create a resource group
 resource "azurerm_resource_group" "product" {
   name     = "product"
-  location = "East US"
+  location = var.resource_group_location
 }
 
 resource "azurerm_network_security_group" "product" {
@@ -62,8 +62,16 @@ resource "azurerm_kubernetes_cluster" "product" {
 
   default_node_pool {
     name       = "default"
-    node_count = 1
+    node_count = var.agent_count
     vm_size    = "Standard_B2s"
+  }
+
+  linux_profile {
+    admin_username = "ubuntu"
+
+    ssh_key {
+      key_data = file(var.ssh_public_key)
+    }
   }
 
   identity {
