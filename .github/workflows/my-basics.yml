@@ -27,7 +27,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: script-files
-        path: ./terraform-azure/scripts/
+        path: ./azure-terraform/scripts/
 
     - name: Download script files
       uses: actions/download-artifact@v3
@@ -43,7 +43,7 @@ jobs:
 
     - name: Create Storage
       env:
-        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
+        SCRIPT_DIR: ${{ github.workspace }}/azure-terraform/scripts
       run: bash  $SCRIPT_DIR/create_storage.sh
 
     - name: Terraform Format
