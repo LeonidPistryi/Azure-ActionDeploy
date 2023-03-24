@@ -3,16 +3,16 @@ name: My-GithubActions-Basics
 on:
   push:
     paths:
-    - 'azure-terraform/**'
+    - 'terraform-azure/**'
     branches:
     - main
-    
+
 
 env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}    
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
 permissions:
   id-token: write
@@ -22,19 +22,19 @@ permissions:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    defaults: 
-      run: 
-        working-directory: azure-terraform
-    
+    defaults:
+      run:
+        working-directory: terraform-azure
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Copy script files
       uses: actions/upload-artifact@v3
       with:
         name: script-files
-        path: ./azure-terraform/scripts/
+        path: ./terraform-azure/scripts/
 
     - name: Download script files
       uses: actions/download-artifact@v3
@@ -46,11 +46,11 @@ jobs:
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}    
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Create Storage
       env:
-        SCRIPT_DIR: ${{ github.workspace }}/azure-terraform/scripts
+        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/create_storage.sh
 
     - name: Terraform Format
