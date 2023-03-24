@@ -11,7 +11,7 @@ sleep 5s
 
 else
 # Create resource group
-az group create --name $RESOURCE_GROUP_NAME --location eastus2
+az group create --name $RESOURCE_GROUP_NAME --location eastus
 # Create storage account
 az storage account create --resource-group $RESOURCE_GROUP_NAME --name $STORAGE_ACCOUNT_NAME --sku Standard_LRS  --https-only true
 # Create blob container
