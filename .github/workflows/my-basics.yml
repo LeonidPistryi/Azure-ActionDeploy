@@ -65,9 +65,11 @@ jobs:
       id: plan
       run: terraform plan -no-color
 
-    - name: Terraform Apply
+    - name: terraform apply
+      if: "!contains(github.event.head_commit.message, 'destroy')"
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
+      if: contains(github.event.head_commit.message, 'destroy')
       run: terraform destroy -auto-approve
 
