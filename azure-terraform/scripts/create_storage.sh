@@ -1,8 +1,8 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME=rgAzureTeam
-STORAGE_ACCOUNT_NAME=storageAzureTeam
-CONTAINER_NAME=containerName
+RESOURCE_GROUP_NAME=rgforourteam
+STORAGE_ACCOUNT_NAME=storagenametest
+CONTAINER_NAME=containername
 
 # Check if storage account exists
 if  az storage account show --name $STORAGE_ACCOUNT_NAME --query id --output tsv >/dev/null 2>&1; then
