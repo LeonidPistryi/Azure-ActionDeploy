@@ -4,6 +4,7 @@ resource "azurerm_resource_group" "product" {
   location = var.resource_group_location
 }
 
+
 resource "azurerm_network_security_group" "product" {
   name                = "product-security-group"
   location            = azurerm_resource_group.product.location

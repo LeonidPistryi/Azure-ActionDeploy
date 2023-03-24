@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME=tfstate
+RESOURCE_GROUP_NAME=storage_azure_team
 STORAGE_ACCOUNT_NAME=tfstateitsprout
 CONTAINER_NAME=tfstate
 
