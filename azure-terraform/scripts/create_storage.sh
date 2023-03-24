@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME=rgforourteam
+RESOURCE_GROUP_NAME=microfostsitnamedtest
 STORAGE_ACCOUNT_NAME=storagenametest
 CONTAINER_NAME=containername
 
