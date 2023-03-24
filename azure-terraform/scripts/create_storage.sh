@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RESOURCE_GROUP_NAME=microfostsitnamedtest
-STORAGE_ACCOUNT_NAME=storagenametest
+STORAGE_ACCOUNT_NAME=namedisshitpleasedeletethisshit
 CONTAINER_NAME=containername
 
 # Check if storage account exists
