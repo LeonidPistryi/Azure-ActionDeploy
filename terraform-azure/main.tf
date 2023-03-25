@@ -89,4 +89,3 @@ output "kube_config" {
 
   sensitive = true
 }
-
