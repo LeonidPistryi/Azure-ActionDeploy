@@ -55,10 +55,10 @@ resource "azurerm_virtual_network" "product" {
 }
 
 resource "azurerm_kubernetes_cluster" "product" {
-  name                = var.claster_name
+  name                = var.cluster_name
   location            = azurerm_resource_group.product.location
   resource_group_name = azurerm_resource_group.product.name
-  dns_prefix          = var.claster_name
+  dns_prefix          = var.cluster_name
   kubernetes_version  = var.kubernetes_version
 
   default_node_pool {
