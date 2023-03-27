@@ -7,7 +7,7 @@ variable "agent_count" {
   default = 1
 }
 
-variable "claster_name" {
+variable "cluster_name" {
   type = string
   description = "AKS name in Azure"
 }
