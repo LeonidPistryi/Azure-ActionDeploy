@@ -7,6 +7,12 @@ variable "agent_count" {
   default = 1
 }
 
-# variable "ssh_public_key" {
-#   default = "~/.ssh/id_rsa.pub"
-# }
+variable "claster_name" {
+  type = string
+  description = "AKS name in Azure"
+}
+
+variable "kubernetes_version" {
+type = string
+description = "Kubernetes version"
+}
