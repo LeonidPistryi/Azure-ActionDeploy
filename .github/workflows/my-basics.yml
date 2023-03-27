@@ -56,7 +56,7 @@ jobs:
       run: terraform destroy -auto-approve
 
   terraform-CD:
-      needs: terraform-CI
+      needs: terraform
       if: "!contains(github.event.head_commit.message, 'destroy')"
       runs-on: ubuntu-latest
       defaults:
