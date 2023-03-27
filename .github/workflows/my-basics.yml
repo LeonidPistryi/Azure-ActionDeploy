@@ -4,7 +4,7 @@ on:
   push:
     paths:
     - 'terraform-azure/**'
-    - '.gitgub/workflows/my-basics.yml'
+    - '.github/workflows/my-basics.yml'
     branches:
     - main
 
