@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "product" {
   name     = "product"
   location = var.resource_group_location
 }
-#asd
+# Create sg
 resource "azurerm_network_security_group" "product" {
   name                = "product-security-group"
   location            = azurerm_resource_group.product.location
@@ -26,8 +26,6 @@ resource "azurerm_network_security_group" "product" {
   }
 }
 
-
-
 # Create public ip
 resource "azurerm_public_ip" "product" {
   name                = "PublicIPForLB"
@@ -35,9 +33,6 @@ resource "azurerm_public_ip" "product" {
   resource_group_name = azurerm_resource_group.product.name
   allocation_method   = "Static"
 }
-
-
-
 
 # Create load balancer
 resource "azurerm_lb" "product" {
