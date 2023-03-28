@@ -34,6 +34,9 @@ resource "azurerm_public_ip" "product" {
   allocation_method   = "Static"
 }
 
+
+
+
 # Create load balancer
 resource "azurerm_lb" "product" {
   name                = "LoadBalancer"
