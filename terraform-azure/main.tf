@@ -26,6 +26,8 @@ resource "azurerm_network_security_group" "product" {
   }
 }
 
+
+
 # Create public ip
 resource "azurerm_public_ip" "product" {
   name                = "PublicIPForLB"

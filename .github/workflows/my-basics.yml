@@ -1,6 +1,7 @@
 name: My-GithubActions-Basics
 
 on:
+  workflow_dispatch:
   push:
     paths:
     - 'terraform-azure/**'
