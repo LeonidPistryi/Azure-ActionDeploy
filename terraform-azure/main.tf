@@ -97,7 +97,7 @@ resource "azurerm_mysql_server" "product" {
   version    = "5.7"
 
   auto_grow_enabled                 = true
-  backup_retention_days             = 1
+  backup_retention_days             = 7
   geo_redundant_backup_enabled      = false
   infrastructure_encryption_enabled = false
   public_network_access_enabled     = true
