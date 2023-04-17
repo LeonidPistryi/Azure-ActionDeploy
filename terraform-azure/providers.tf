@@ -15,7 +15,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "testname0123456789"
-    storage_account_name = "storageaccounttest1234"
+    storage_account_name = "storagetest123"
     container_name       = "containernameisamazing"
     key                  = "terraform.containernameisamazing"
   }
