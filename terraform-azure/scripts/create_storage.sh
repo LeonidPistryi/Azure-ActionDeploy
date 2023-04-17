@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RESOURCE_GROUP_NAME=microfostsitnamedtest
-STORAGE_ACCOUNT_NAME=storage123678test
+STORAGE_ACCOUNT_NAME=storage123678testtt
 CONTAINER_NAME=containername
 
 # Authenticate with Azure using environment variables
