@@ -9,10 +9,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "microfostsitnamedtest1"
-    storage_account_name = "storage123"
-    container_name       = "containername"
-    key                  = "terraform.containername"
+    resource_group_name  = "rsgroupwpteam"
+    storage_account_name = "storagewpteam"
+    container_name       = "wpteamcontainer"
+    key                  = "terraform.wpteamcontainer"
   }
 }
 
