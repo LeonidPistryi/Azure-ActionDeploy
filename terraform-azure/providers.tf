@@ -9,8 +9,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "microfostsitnamedtest"
-    storage_account_name = "storage123678testtt"
+    resource_group_name  = "microfostsitnamedtest1"
+    storage_account_name = "storage123"
     container_name       = "containername"
     key                  = "terraform.containername"
   }
