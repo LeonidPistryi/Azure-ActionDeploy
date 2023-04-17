@@ -3,6 +3,7 @@ resource "azurerm_resource_group" "product" {
   name     = "product"
   location = var.resource_group_location
 }
+
 # Create sg
 resource "azurerm_network_security_group" "product" {
   name                = "product-security-group"
