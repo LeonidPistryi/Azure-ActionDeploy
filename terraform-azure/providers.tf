@@ -1,8 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
-
 terraform {
   required_version = ">=1.0"
 
@@ -14,10 +9,13 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "testname0123456789"
-    storage_account_name = "storagetest123"
-    container_name       = "containernameisamazing"
-    key                  = "terraform.containernameisamazing"
+    resource_group_name  = "microfostsitnamedtest"
+    storage_account_name = "storage123678test"
+    container_name       = "containername"
+    key                  = "terraform.containername"
   }
 }
 
+provider "azurerm" {
+  features {}
+}
