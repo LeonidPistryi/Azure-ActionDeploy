@@ -1,8 +1,8 @@
 #!/bin/bash
 
 RESOURCE_GROUP_NAME=testname0123456789
-STORAGE_ACCOUNT_NAME=testname0123456789
-CONTAINER_NAME=testname0123456789
+STORAGE_ACCOUNT_NAME=storageaccounttest1234
+CONTAINER_NAME=containernameisamazing
 
 # Authenticate with Azure using environment variables
 az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
