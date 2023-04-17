@@ -12,7 +12,7 @@ terraform {
     resource_group_name  = "testname0123456789"
     storage_account_name = "storageaccounttest1234"
     container_name       = "containernameisamazing"
-    key                  = "terraform.containername"
+    key                  = "terraform.containernameisamazing"
   }
 }
 
