@@ -1,20 +1,24 @@
-FROM alpine:latest
+FROM wordpress:latest
 
-RUN chown -R mysql:root /var/lib/mysql/
+# Keep credentilas to databases
+# ENV SERVER_NAME
+# APT Update/Upgrade, then install packages we need
+# RUN apt update && \
+#     apt upgrade -y && \
+#     apt autoremove && \
+#     apt install -y \
+#     vim \
+#     wget \
+#     mariadb-client
 
-ARG MYSQL_DATABASE
-ARG MYSQL_USER
-ARG MYSQL_PASSWORD
-ARG MYSQL_ROOT_PASSWORD
+# Replace php.ini
+# COPY php.ini /usr/local/etc/php
 
-ENV MYSQL_DATABASE=$MYSQL_DATABASE
-ENV MYSQL_USER=$MYSQL_USER
-ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
-ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-
-ADD data.sql /etc/mysql/data.sql
-
-RUN sed -i 's/MYSQL_DATABASE/'$MYSQL_DATABASE'/g' /etc/mysql/data.sql
-RUN cp /etc/mysql/data.sql /docker-entrypoint-initdb.d
-
-EXPOSE 3306
+# Install WP-CLI
+# RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+#     php wp-cli.phar --info&& \
+#     chmod +x wp-cli.phar && \
+#     mv wp-cli.phar /usr/local/bin/wp && \
+#     # Remove old php.ini files (wihtout creating new image)
+#     rm /usr/local/etc/php/php.ini-development && \
+#     rm /usr/local/etc/php/php.ini-production
