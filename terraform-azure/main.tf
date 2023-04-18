@@ -47,7 +47,6 @@ resource "azurerm_lb" "product" {
   }
 }
 
-
 # Create a virtual network within the resource group
 resource "azurerm_virtual_network" "product" {
   name                = "product-network"
