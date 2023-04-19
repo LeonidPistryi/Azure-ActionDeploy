@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-# Keep credentilas to databases
+# To keep credentilas to databases
 ENV SERVER_NAME wpteam-mysqlserver.mysql.database.azure.com
 ENV USER_NAME mysqladminun@wpteam-mysqlserver
 ENV USER_PASSWORD H@Sh1CoR3!
