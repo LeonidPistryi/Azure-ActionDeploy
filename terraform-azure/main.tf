@@ -55,7 +55,7 @@ resource "azurerm_virtual_network" "product" {
   address_space       = ["10.0.0.0/16"]
 }
 
-
+# Create k8s
 resource "azurerm_kubernetes_cluster" "product" {
   name                = var.cluster_name
   location            = azurerm_resource_group.product.location
@@ -77,7 +77,6 @@ resource "azurerm_kubernetes_cluster" "product" {
     Environment = "Production"
   }
 }
-
 
 resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
