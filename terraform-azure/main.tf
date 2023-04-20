@@ -105,3 +105,26 @@ resource "azurerm_mysql_server" "product" {
   ssl_enforcement_enabled           = true
   ssl_minimal_tls_version_enforced  = "TLS1_2"
 }
+
+#Create subnet
+resource "azurerm_subnet" "product" {
+  name                 = "AzureFirewallSubnet"
+  resource_group_name  = azurerm_resource_group.product.name
+  virtual_network_name = azurerm_virtual_network.product.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+# Create fireawall
+resource "azurerm_firewall" "product" {
+  name                = "testfirewall"
+  location            = azurerm_resource_group.product.location
+  resource_group_name = azurerm_resource_group.product.name
+  sku_name            = "AZFW_VNet"
+  sku_tier            = "Standard"
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = azurerm_subnet.product.id
+    public_ip_address_id = azurerm_public_ip.product.id
+  }
+}
