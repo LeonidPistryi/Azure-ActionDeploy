@@ -84,7 +84,7 @@ resource "local_file" "kubeconfig" {
   content  = azurerm_kubernetes_cluster.product.kube_config_raw
 }
 
-#Create mysql server
+#Create mysql a server
 resource "azurerm_mysql_server" "product" {
   name                = "wpteam-mysqlserver"
   location            = azurerm_resource_group.product.location
@@ -106,25 +106,11 @@ resource "azurerm_mysql_server" "product" {
   ssl_minimal_tls_version_enforced  = "TLS1_2"
 }
 
-#Create subnet
-resource "azurerm_subnet" "product" {
-  name                 = "AzureFirewallSubnet"
-  resource_group_name  = azurerm_resource_group.product.name
-  virtual_network_name = azurerm_virtual_network.product.name
-  address_prefixes     = ["10.0.1.0/24"]
-}
-
-# Create fireawall
-resource "azurerm_firewall" "product" {
-  name                = "testfirewall"
-  location            = azurerm_resource_group.product.location
+# Create a firewall for mysql server
+resource "azurerm_mysql_firewall_rule" "product" {
+  name                = "office"
   resource_group_name = azurerm_resource_group.product.name
-  sku_name            = "AZFW_VNet"
-  sku_tier            = "Standard"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = azurerm_subnet.product.id
-    public_ip_address_id = azurerm_public_ip.product.id
-  }
+  server_name         = azurerm_mysql_server.product.name
+  start_ip_address    = "0.0.0.0/0"
+  end_ip_address      = "255.255.255.255"
 }
