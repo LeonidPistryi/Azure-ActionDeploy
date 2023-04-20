@@ -33,6 +33,7 @@ resource "azurerm_public_ip" "product" {
   location            = azurerm_resource_group.product.location
   resource_group_name = azurerm_resource_group.product.name
   allocation_method   = "Static"
+  sku                 = "Standard"
 }
 
 # Create load balancer
@@ -120,6 +121,10 @@ resource "azurerm_firewall" "product" {
   resource_group_name = azurerm_resource_group.product.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Standard"
-  start_ip_address    = "0.0.0.0"
-  end_ip_address      = "255.255.255.255"
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = azurerm_subnet.product.id
+    public_ip_address_id = azurerm_public_ip.product.id
+  }
 }
