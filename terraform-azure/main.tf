@@ -111,6 +111,6 @@ resource "azurerm_mysql_firewall_rule" "product" {
   name                = "office"
   resource_group_name = azurerm_resource_group.product.name
   server_name         = azurerm_mysql_server.product.name
-  start_ip_address    = "0.0.0.0/0"
+  start_ip_address    = "0.0.0.0"
   end_ip_address      = "255.255.255.255"
 }
