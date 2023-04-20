@@ -110,7 +110,7 @@ resource "azurerm_subnet" "product" {
   name                 = "AzureFirewallSubnet"
   resource_group_name  = azurerm_resource_group.product.name
   virtual_network_name = azurerm_virtual_network.product.name
-  address_prefixes     = ["0.0.0.0/0"]
+  address_prefixes     = ["10.0.1.0/24"]
 }
 
 # Create fireawall
@@ -120,10 +120,6 @@ resource "azurerm_firewall" "product" {
   resource_group_name = azurerm_resource_group.product.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Standard"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = azurerm_subnet.product.id
-    public_ip_address_id = azurerm_public_ip.product.id
-  }
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "255.255.255.255"
 }
