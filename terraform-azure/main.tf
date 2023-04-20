@@ -105,14 +105,6 @@ resource "azurerm_mysql_server" "product" {
   ssl_minimal_tls_version_enforced  = "TLS1_2"
 }
 
-# Create virtual network
-resource "azurerm_virtual_network" "product" {
-  name                = "testvnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.product.location
-  resource_group_name = azurerm_resource_group.product.name
-}
-
 #Create subnet
 resource "azurerm_subnet" "product" {
   name                 = "AzureFirewallSubnet"
