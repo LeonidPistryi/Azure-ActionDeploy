@@ -114,3 +114,4 @@ resource "azurerm_mysql_firewall_rule" "product" {
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "255.255.255.255"
 }
+
