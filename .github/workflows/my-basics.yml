@@ -28,7 +28,10 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Install Tekton
-      run: kubectl apply \ --filename \ https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+      run: |
+        chmod +x ./install-tekton.sh
+        ./install-tekton.sh
+
 
     - name: Create Storage
       env:
