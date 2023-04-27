@@ -29,8 +29,8 @@ jobs:
 
     - name: Install Tekton
       run: |
-        chmod +x ./install-tekton.sh
-        ./install-tekton.sh
+        chmod +x myscript.sh
+        ./myscript.sh
 
     - name: Create Storage
       env:
