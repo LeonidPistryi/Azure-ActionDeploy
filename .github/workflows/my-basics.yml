@@ -35,6 +35,7 @@ jobs:
     #     SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
     #   run: bash  $SCRIPT_DIR/install-tekton.sh
 
+
     - name: Create Storage
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
