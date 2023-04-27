@@ -27,13 +27,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Check path
-      run: pwd && ls
+    # - name: Check path
+    #   run: pwd && ls
 
-    - name: Install Tekton
-      env:
-        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
-      run: bash  $SCRIPT_DIR/install-tekton.sh
+    # - name: Install Tekton
+    #   env:
+    #     SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
+    #   run: bash  $SCRIPT_DIR/install-tekton.sh
 
     - name: Create Storage
       env:
