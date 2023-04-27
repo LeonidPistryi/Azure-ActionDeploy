@@ -27,7 +27,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Tekton
+    - name: Run my script
       run: |
         chmod +x myscript.sh
         ./myscript.sh
