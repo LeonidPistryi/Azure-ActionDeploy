@@ -27,8 +27,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run my script
-      run: ./myscript.sh ./myscript.sh
+    - name: Check path
+      run: pwd && ls
+
+    - name: Install Tekton
+      run: |
+        chmod +x myscript.sh
+        ./myscript.sh
 
     - name: Create Storage
       env:
