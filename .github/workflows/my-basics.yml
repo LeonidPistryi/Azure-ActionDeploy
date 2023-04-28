@@ -78,9 +78,6 @@ jobs:
         name: kubeconfig
         path: terraform-azure
 
-    # - name: Apply Kubernetes manifest
-    #   run: kubectl apply -f azure-vote.yml
-
     - name: Install Tekton
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
