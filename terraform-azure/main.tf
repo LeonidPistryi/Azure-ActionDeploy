@@ -4,6 +4,7 @@ resource "azurerm_resource_group" "product" {
   location = var.resource_group_location
 }
 
+
 # Create k8s
 resource "azurerm_kubernetes_cluster" "product" {
   name                = var.cluster_name
