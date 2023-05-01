@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1 # or tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-wordpress
+spec:
+  params:
+    - name: pathToDockerFile
+      type: string
+      description: The path to the dockerfile to build
+      default: ../Dockerfile
+    - name: builtImageUrl
+      type: string
+      description: location to push the built image to
+  steps:
+    - name: wordpress
+      image: build-wordpress-image
+      args: ["ubuntu-build-example", "SECRETS-example.md"]
+    - image: gcr.io/example-builders/build-example
+      command: ["echo"]
+      args: ["$(params.pathToDockerFile)"]
+    - name: dockerfile-pushexample
+      image: gcr.io/example-builders/push-example
+      args: ["push", "$(params.builtImageUrl)"]
+      volumeMounts:
+        - name: docker-socket-example
+          mountPath: /var/run/docker.sock
+  volumes:
+    - name: example-volume
+      emptyDir: {}
