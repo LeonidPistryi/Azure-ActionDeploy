@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: run-my-docker-image
+spec:
+  taskRef:
+    name: run-docker-image
+  params:
+  - name: image
+    value: sonoflion/wpteam:latest
