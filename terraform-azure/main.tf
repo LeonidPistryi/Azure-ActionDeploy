@@ -54,7 +54,6 @@ resource "azurerm_mysql_server" "product" {
   ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"
 }
 
-
 # Create a firewall for mysql server
 resource "azurerm_mysql_firewall_rule" "product" {
   name                = "office"
