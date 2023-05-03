@@ -1,0 +1,27 @@
+piVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipeline-run
+spec:
+  serviceAccountName: docker-login
+  pipelineRef:
+    name: pipeline
+    podTemplate:
+      securityContext:
+        fsGroup: 65532  
+  params:
+    - name: REPO
+      value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
+    - name: IMAGE
+      value: "docker.io/sonoflion/wpteam"
+    - name: TAG
+      value: latest
+  workspaces:
+    - name: workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi

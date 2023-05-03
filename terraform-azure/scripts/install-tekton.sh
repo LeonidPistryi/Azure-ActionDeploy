@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 # Install Tekton CLI
-curl -LO https://github.com/tektoncd/cli/releases/download/v0.20.0/tkn_0.20.0_Linux_x86_64.tar.gz
-sudo tar xvzf tkn_0.20.0_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
+curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Darwin_all.tar.gz
+
+# Extract tkn to your PATH (e.g. /usr/local/bin)
+sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz -C /usr/local/bin tkn
+
+# Install tasks from Tekton Hub
+tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 # Install Tekton Pipelines
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
@@ -12,3 +17,9 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers
 
 # Install Tekton Dashboard
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml
+
+# Update Tekton Dashboard service to use LoadBalancer
+kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
+
+# Install Task git-clone && task buildah
+tkn hub install task git-clone && tkn hub install task buildah
