@@ -20,6 +20,3 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 
 # Update Tekton Dashboard service to use LoadBalancer
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
-
-# Install Task git-clone && task buildah
-tkn hub install task git-clone && tkn hub install task buildah
