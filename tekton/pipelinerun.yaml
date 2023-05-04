@@ -1,14 +1,14 @@
-piVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: pipeline-run
+  generateName: pipeline-run-
 spec:
   serviceAccountName: docker-login
   pipelineRef:
     name: pipeline
-    podTemplate:
-      securityContext:
-        fsGroup: 65532  
+  podTemplate:
+    securityContext:
+      fsGroup: 65532  
   params:
     - name: REPO
       value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
