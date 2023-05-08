@@ -32,6 +32,7 @@ resource "local_file" "kubeconfig" {
   content  = azurerm_kubernetes_cluster.product.kube_config_raw
 }
 
+
 #Create mysql a server
 resource "azurerm_mysql_server" "product" {
   name                = "wpteam-mysqlserver"
