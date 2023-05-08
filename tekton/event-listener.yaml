@@ -3,7 +3,7 @@ kind: EventListener
 metadata:
   name: github-pr
 spec:
-  serviceAccountName: tekton-service-account
+  serviceAccountName: docker-login
   triggers:
     - name: pr-trigger
       bindings:
