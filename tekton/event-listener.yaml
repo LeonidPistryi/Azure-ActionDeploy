@@ -6,6 +6,20 @@ spec:
   serviceAccountName: docker-login
   triggers:
     - name: pr-trigger
+      interceptors:
+        - ref:
+            name: "github"
+            kind: ClusterInterceptor
+            apiVersion: triggers.tekton.dev
+          params:
+          - name: "pipeline"
+            value:
+              secretName: github-trigger-secret
+              secretKey: secretToken
+          - name: "eventTypes"
+            value: ["push"]
+          - name: "branches"
+            value: ["main"]
       bindings:
         - ref: github-pr-trigger-binding
       template:
