@@ -1,40 +1,13 @@
 apiVersion: triggers.tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: github-pr
-spec:
-  serviceAccountName: docker-login
-  triggers:
-    - name: pr-trigger
-      interceptors:
-        - ref:
-            name: "github"
-            kind: ClusterInterceptor
-            apiVersion: triggers.tekton.dev
-          params:
-          - name: "pipeline"
-            value:
-              secretName: github-trigger-secret
-              secretKey: secretToken
-          - name: "eventTypes"
-            value: ["push"]
-          - name: "branches"
-            value: ["main"]
-      bindings:
-        - ref: github-pr-trigger-binding
-      template:
-        ref: github-pr-trigger-template
----
-apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
   name: github-pr-trigger-binding
 spec:
   params:
-  - name: gitRepository
-    value: $(body.repository.html_url))
-  - name: commits
-    value: $(body.commits)
+  - name: revision
+    value: $(body.pull_request.head.sha)
+  - name: repo-url
+    value: $(body.repository.clone_url)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
@@ -67,4 +40,30 @@ spec:
         value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
       - name: docker-image
         value: "docker.io/sonoflion/wpteam"
-
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: github-pr
+spec:
+  serviceAccountName: docker-login
+  triggers:
+    - name: pr-trigger
+      interceptors:
+        - ref:
+            name: "github"
+            kind: ClusterInterceptor
+            apiVersion: triggers.tekton.dev
+          params:
+          - name: "pipeline"
+            value:
+              secretName: github-trigger-secret
+              secretKey: secretToken
+          - name: "eventTypes"
+            value: ["push"]
+          - name: "branches"
+            value: ["main"]
+      bindings:
+        - ref: github-pr-trigger-binding
+      template:
+        ref: github-pr-trigger-template
