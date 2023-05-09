@@ -9,6 +9,19 @@ spec:
   - name: commits
     value: $(body.commits)
 ---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: docker-login-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: docker-login
+  namespace: default
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
