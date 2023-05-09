@@ -1,54 +1,58 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
-  name: github-pr-trigger-binding
+  name: git-push-binding
 spec:
   params:
-  - name: revision
-    value: $(body.pull_request.head.sha)
-  - name: repo-url
-    value: $(body.repository.clone_url)
+  - name: gitRepository
+    value: $(body.repository.html_url)
+  - name: commits
+    value: $(body.commits)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: github-pr-trigger-template
+  name: git-push-template
 spec:
-  params:
-  - name: revision
-    default: main
-  - name: repo-url
   resourcetemplates:
-  - apiVersion: tekton.dev/v1beta1
-    kind: PipelineRun
-    metadata:
-      generateName: my-pipeline-
-    spec:
-      pipelineRef:
-        name: pipeline
-      workspaces:
-      - name: shared-data
-        volumeClaimTemplate:
-          spec:
-            accessModes:
-            - ReadWriteOnce
-            resources:
-              requests:
-                storage: 1Gi
-      params:
-      - name: repo-url
-        value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
-      - name: docker-image
-        value: "docker.io/sonoflion/wpteam"
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: clonebuildpushrun-
+      spec:
+        serviceAccountName: docker-login
+        pipelineRef:
+          name: clonebuildpush
+        podTemplate:
+          securityContext:
+            fsGroup: 65532  
+        params:
+          - name: revision
+            value: main
+          - name: gitrepositoryurl
+            value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
+          - name: IMAGE
+            value: "docker.io/sonoflion/wpteam"
+          - name: TAG
+            value: v1
+        workspaces:
+          - name: workspace
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi   
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
-  name: github-pr
+  name: git-push-listener
 spec:
-  serviceAccountName: docker-login
+  serviceAccountName: pipeline
   triggers:
-    - name: pr-trigger
+    - name: git-push-trigger
       interceptors:
         - ref:
             name: "github"
@@ -64,6 +68,6 @@ spec:
           - name: "branches"
             value: ["main"]
       bindings:
-        - ref: github-pr-trigger-binding
+        - ref: git-push-binding
       template:
-        ref: github-pr-trigger-template
+        ref : git-push-template
