@@ -50,7 +50,7 @@ kind: EventListener
 metadata:
   name: git-push-listener
 spec:
-  serviceAccountName: pipeline
+  serviceAccountName: docker-login
   triggers:
     - name: git-push-trigger
       interceptors:
