@@ -23,3 +23,5 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 
 # Update Tekton Dashboard service to use LoadBalancer
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
