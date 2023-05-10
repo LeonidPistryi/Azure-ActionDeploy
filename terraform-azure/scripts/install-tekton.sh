@@ -16,7 +16,13 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml
 
 # Install Tekton Interceptors
-$ kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml
+
+# Install tkn interceptors
+kubectl apply -f https://storage.googleapis.com/tekton-releases/interceptors/github/latest/release.yaml
+
+# Install Tekton triggers
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml
 
 # Install Tekton Dashboard
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml
@@ -24,6 +30,7 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 # Update Tekton Dashboard service to use LoadBalancer
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
+#Install Ingress-nginx-contoller and Ingress-nginx-contolle-admission
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
 
 if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user/keys | grep -q "Tekton SSH Key"; then
