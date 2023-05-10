@@ -80,6 +80,7 @@ jobs:
 
     - name: Install Tekton
       env:
+        TOKEN_TEKTON: ${{ secrets.tekton }}
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
 
