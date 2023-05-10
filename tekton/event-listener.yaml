@@ -14,32 +14,34 @@ kind: TriggerTemplate
 metadata:
   name: github-pr-trigger-template
 spec:
-  params:
-  - name: revision
-    default: main
-  - name: repo-url
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
       generateName: my-pipeline-
     spec:
+      serviceAccountName: docker-login
       pipelineRef:
         name: pipeline
-      workspaces:
-      - name: shared-data
-        volumeClaimTemplate:
-          spec:
-            accessModes:
-            - ReadWriteOnce
-            resources:
-              requests:
-                storage: 1Gi
+      podTemplate: 
+        securityContext: 
+          fsGroup: 65532
       params:
+      - name: revision
+        value: main
       - name: repo-url
         value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
       - name: docker-image
         value: "docker.io/sonoflion/wpteam"
+      workspaces:
+      - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
