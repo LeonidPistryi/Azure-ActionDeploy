@@ -1,13 +1,12 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: pipeline
+  name: pipeline1
 spec:
   params:
-    - name: REPO
-    - name: IMAGE
-    - name: TAG
-    - name: DOCKERFILE
+    - name: revision
+    - name: repo-url
+    - name: docker-image
       description: Path to the Dockerfile to build.
       default: ../Dockerfile
   workspaces:
@@ -20,8 +19,10 @@ spec:
         - name: output
           workspace: workspace
       params:
+        - name: revision
+          value: $(params.revision)
         - name: url
-          value: $(params.REPO)
+          value: $(params.repo-url)
         - name: deleteExisting
           value: "true"
     - name: build-push-image
@@ -34,6 +35,7 @@ spec:
           workspace: workspace
       params:
         - name: IMAGE
-          value: "$(params.IMAGE):$(params.TAG)"
+          value: "$(params.docker-image):latest"
         - name: FORMAT
           value: "docker"
+          
