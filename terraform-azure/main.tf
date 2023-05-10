@@ -4,7 +4,6 @@ resource "azurerm_resource_group" "product" {
   location = var.resource_group_location
 }
 
-
 # Create k8s
 resource "azurerm_kubernetes_cluster" "product" {
   name                = var.cluster_name
@@ -32,7 +31,6 @@ resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
   content  = azurerm_kubernetes_cluster.product.kube_config_raw
 }
-
 
 #Create mysql a server
 resource "azurerm_mysql_server" "product" {
