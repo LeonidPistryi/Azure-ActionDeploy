@@ -18,30 +18,30 @@ spec:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
-    generateName: my-pipeline-
+      generateName: my-pipeline-
     spec:
-    serviceAccountName: docker-login
-    pipelineRef:
-      name: pipeline1
-    podTemplate: 
-      securityContext: 
-        fsGroup: 65532
-    params:
-    - name: revision
-      value: main
-    - name: repo-url
-      value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
-    - name: docker-image
-      value: "docker.io/sonoflion/wpteam"
+      serviceAccountName: docker-login
+      pipelineRef:
+        name: pipeline1
+      podTemplate: 
+        securityContext: 
+          fsGroup: 65532
+      params:
+      - name: revision
+        value: main
+      - name: repo-url
+        value: "https://github.com/LeonidPistryi/Azure-ActionDeploy"
+      - name: docker-image
+        value: "docker.io/sonoflion/wpteam"
     workspaces:
-    - name: workspace
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 10Gi
+      - name: workspace
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
@@ -50,7 +50,7 @@ metadata:
 spec:
   serviceAccountName: docker-login
   triggers:
-    - name: pr-trigger
+    - name: git-push-trigger
       interceptors:
         - ref:
             name: "github"
