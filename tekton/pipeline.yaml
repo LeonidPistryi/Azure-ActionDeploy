@@ -21,7 +21,7 @@ spec:
       params:
         - name: revision
           value: $(params.revision)
-        - name: url
+        - name: repo-url
           value: $(params.repo-url)
         - name: deleteExisting
           value: "true"
